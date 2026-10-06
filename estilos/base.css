@@ -50,6 +50,12 @@ h3 { font-size: 1.14em; line-height: 1.15; }
 @keyframes flotar { to { transform: translateY(-.5em); } }
 @keyframes menear { to { transform: rotate(-16deg); } }
 
+/* Al pasar de una página a otra, el contenido se funde con el anterior en vez de aparecer de golpe.
+   El menú se queda quieto en su sitio. */
+@view-transition { navigation: auto; }
+.menu { view-transition-name: menu; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 200ms; }
+
 /* lienzo */
 .lienzo { width: 65em; height: 36.5em; padding: 1.2em 2.2em 1.4em; display: grid; grid-template-rows: auto minmax(0, 1fr); gap: 1.1em; }
 main { display: grid; grid-template-rows: minmax(0, 1fr); min-height: 0; }

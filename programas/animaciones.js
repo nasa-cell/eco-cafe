@@ -18,5 +18,4 @@ function contar(numero) {
   requestAnimationFrame(cuadro);
 }
 
-entrar(document.querySelector('.pagina'));
 if (!sinMovimiento) document.querySelectorAll('[data-contar]').forEach(contar);
