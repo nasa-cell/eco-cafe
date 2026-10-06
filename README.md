@@ -22,7 +22,7 @@ Página web del emprendimiento **EcoCafé**: un envase de acero inoxidable con d
 
 - `paginas/`: las páginas internas.
 - `estilos/`: colores, menú, cuadros y adaptación a celular.
-- `programas/`: animaciones, pestañas, teclado y fondo de hojas.
+- `programas/`: animaciones, pestañas, teclado, fondo de hojas y el puente para manejar la página desde el celular con Conexiones.
 - `imagenes/`: logo, fotos de los envases y emoticones.
 
 ## Cómo verla
