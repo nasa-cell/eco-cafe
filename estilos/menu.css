@@ -1,0 +1,10 @@
+/* menú */
+.menu { display: flex; align-items: center; justify-content: space-between; gap: 1em; height: 3.4em; }
+.marca { font-size: 1.45em; display: flex; align-items: center; gap: .4em; }
+.marca img { width: 1.9em; height: 1.9em; border-radius: 50%; object-fit: cover; background: var(--negro-foto); border: .1em solid var(--tinta); }
+.menu nav { display: flex; gap: .6em; }
+.menu nav a, a.acceso { color: inherit; text-decoration: none; }
+.menu nav a { font-size: .86em; font-weight: 700; white-space: nowrap; display: inline-flex; align-items: center; gap: .35em; background: var(--crema); border: var(--borde); border-radius: 999px; box-shadow: .28em .28em 0 var(--tinta); padding: .4em .75em; transition: transform 140ms var(--salida), box-shadow 140ms var(--salida); }
+.menu nav a[aria-current] { background: var(--naranja); box-shadow: 0 0 0 var(--tinta); transform: translate(.28em, .28em); }
+.menu nav img { width: 1.6em; height: 1.6em; transition: transform 180ms var(--salida); }
+.menu nav a[aria-current] img { transform: scale(1.2) rotate(-8deg); }

@@ -1,0 +1,16 @@
+/* impacto, diseños y pedido */
+.gran-numero { font-size: 5.4em; color: var(--naranja); }
+.numero-medio { font-size: 2.6em; }
+.disenos { display: grid; grid-template-columns: repeat(4, 1fr); gap: .9em; align-content: center; }
+.disenos figure { background: var(--negro-foto); border: var(--borde); border-radius: 1.1em; padding: .4em .4em 0; box-shadow: var(--sombra); transition: transform 180ms var(--salida); }
+.disenos figure:nth-child(odd) { rotate: -2deg; }
+.disenos figure:nth-child(even) { rotate: 2deg; }
+.disenos figcaption { font-size: .95em; text-align: center; padding: .45em .2em; color: var(--crema); }
+.respuesta h2 { font-size: 1.5em; line-height: 1.15; }
+.respuesta p { font-size: 1.1em; }
+.precio .num { font-size: 3.6em; }
+.pedido { padding: 1.4em 1.6em; }
+.pedido h2 { font-size: 2.2em; line-height: 1.05; }
+.fono { font-size: 2.8em; line-height: 1.1; user-select: all; }
+.foto-pedido { background: var(--negro-foto); border: var(--borde); border-radius: 1em; padding: .3em; width: 9.5em; rotate: 5deg; justify-self: center; align-self: center; animation: flotar 4s var(--vaiven) infinite alternate; }
+.logo-grande { width: 100%; aspect-ratio: 3/2; object-fit: cover; border-radius: var(--radio); border: var(--borde); box-shadow: var(--sombra); background: var(--negro-foto); display: block; }

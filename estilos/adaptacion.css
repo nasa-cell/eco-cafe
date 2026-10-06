@@ -1,0 +1,28 @@
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover, .pestanas button:hover { transform: translateY(-.12em); }
+  .acceso:hover, .disenos figure:hover { transform: translateY(-.3em); }
+  .menu nav a:hover img { transform: scale(1.2) rotate(-8deg); }
+}
+
+/* En celular la pantalla deja de ser fija: las piezas se apilan y se baja con el dedo. */
+/* También se usa en tabletas en vertical y en celulares echados, donde la pantalla fija quedaría con letra muy chica. */
+@media (max-width: 700px), (max-width: 1100px) and (orientation: portrait), (max-height: 500px) {
+  body { font-size: clamp(15px, 2.4vw, 19px); display: block; overflow: auto; }
+  .lienzo { width: auto; max-width: 46em; height: auto; margin-inline: auto; padding: 1em 1em 2em; }
+  main, .pagina, .pagina.inicio, .cols { grid-template-columns: 1fr; grid-template-rows: none; }
+  .vasos { gap: .5em; }
+  .vasos div { width: 30%; }
+  .logo-portada { width: min(14em, 100%); }
+  .menu { height: auto; flex-wrap: wrap; }
+  .menu nav { flex-wrap: wrap; }
+  .lugares, .disenos, .bebidas { grid-template-columns: repeat(2, 1fr); }
+  .portada h1 { font-size: 2em; max-width: calc(100% - 2.4em); }
+  .banner { padding-right: 1.3em; }
+  .banner h2 { font-size: 1.5em; }
+  .banner .emoticones, .adorno { display: none; }
+  .fondo img { width: min(16vw, 90px) !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

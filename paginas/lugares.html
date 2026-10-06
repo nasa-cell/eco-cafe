@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lugares | EcoCafé</title>
+  <meta name="description" content="EcoCafé: envase de acero inoxidable con diseño único para tomar tus bebidas sin generar basura. Envase S/ 15, café S/ 6 con tu envase.">
+  <link rel="icon" href="../imagenes/logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Titan+One&display=swap">
+  <link rel="stylesheet" href="../estilos/base.css">
+  <link rel="stylesheet" href="../estilos/menu.css">
+  <link rel="stylesheet" href="../estilos/piezas.css">
+  <link rel="stylesheet" href="../estilos/inicio.css">
+  <link rel="stylesheet" href="../estilos/paginas.css">
+  <link rel="stylesheet" href="../estilos/adaptacion.css">
+</head>
+<body>
+  <div class="fondo" aria-hidden="true"></div>
+
+  <div class="lienzo">
+    <header class="menu">
+      <div class="marca"><img src="../imagenes/logo.jpg" alt="">EcoCafé</div>
+      <nav aria-label="Páginas">
+        <a href="../index.html"><img src="../imagenes/emoticones/casa.png" alt="">Inicio</a>
+        <a href="nosotros.html"><img src="../imagenes/emoticones/oso.png" alt="">Nosotros</a>
+        <a href="impacto.html"><img src="../imagenes/emoticones/hoja.png" alt="">Impacto</a>
+        <a href="lugares.html" aria-current="page"><img src="../imagenes/emoticones/mapa.png" alt="">Lugares</a>
+        <a href="disenos.html"><img src="../imagenes/emoticones/panda.png" alt="">Diseños</a>
+        <a href="pasos.html"><img src="../imagenes/emoticones/granos.png" alt="">Pasos</a>
+        <a href="pedir.html"><img src="../imagenes/emoticones/monedas.png" alt="">Pedir</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="pagina" id="lugares">
+        <div class="banner">
+          <h2>Un envase para todo tu día</h2>
+          <p>Toca un lugar para ver cómo se usa ahí.</p>
+          <div class="emoticones"><img src="../imagenes/emoticones/mapa.png" alt=""><img src="../imagenes/emoticones/pin.png" alt=""></div>
+        </div>
+        <div class="grupo cols" style="--c:1fr;--filas:auto minmax(0,1fr)">
+          <div class="lugares" role="tablist">
+            <button type="button" role="tab" data-pestana="universidad" aria-selected="true"><img class="emo" src="../imagenes/emoticones/oso.png" alt="">Universidad</button>
+            <button type="button" role="tab" data-pestana="instituto" aria-selected="false"><img class="emo" src="../imagenes/emoticones/panda.png" alt="">Instituto</button>
+            <button type="button" role="tab" data-pestana="trabajo" aria-selected="false"><img class="emo" src="../imagenes/emoticones/oso-polar.png" alt="">Trabajo</button>
+            <button type="button" role="tab" data-pestana="hogar" aria-selected="false"><img class="emo" src="../imagenes/emoticones/casa.png" alt="">Hogar</button>
+            <button type="button" role="tab" data-pestana="donde" aria-selected="false"><img class="emo" src="../imagenes/emoticones/pin.png" alt="">Donde vayas</button>
+          </div>
+          <div class="cols" style="--c:1.1fr .9fr">
+            <div class="caja pila centro detalle">
+              <div class="pila" data-panel="universidad" style="gap:.7em"><h2>En la universidad</h2><p>Entre clases, en la biblioteca o en la cafetería. Pides tu café a S/ 6 y no dejas basura en el campus.</p></div>
+              <div class="pila" data-panel="instituto" style="gap:.7em" hidden><h2>En el instituto</h2><p>Va en la mochila. Lo traes en el recreo o a la salida y te sirven en tu propio envase.</p></div>
+              <div class="pila" data-panel="trabajo" style="gap:.7em" hidden><h2>En el trabajo</h2><p>Lo tienes en tu escritorio todo el día. Lo llenas las veces que quieras sin usar un solo vaso desechable.</p></div>
+              <div class="pila" data-panel="hogar" style="gap:.7em" hidden><h2>En el hogar</h2><p>No hace falta comprar café para usarlo. Lo recargas en casa con el tuyo y sales con él.</p></div>
+              <div class="pila" data-panel="donde" style="gap:.7em" hidden><h2>Donde vayas</h2><p>De paseo, de viaje o haciendo deporte. Cierra con tapa y va contigo a cualquier lugar.</p></div>
+            </div>
+            <div class="caja naranja pila centro" style="gap:.8em">
+              <h3>Para todas tus bebidas</h3>
+              <p>No es solo para café. Úsalo con lo que tomes cada día.</p>
+              <div class="bebidas">
+                <span><img class="emo" src="../imagenes/emoticones/taza.png" alt="">Café</span>
+                <span><img class="emo" src="../imagenes/emoticones/matcha.png" alt="">Té matcha</span>
+                <span><img class="emo" src="../imagenes/emoticones/jugo.png" alt="">Jugos</span>
+                <span><img class="emo" src="../imagenes/emoticones/bebida-fruta.png" alt="">Frutas</span>
+                <span><img class="emo" src="../imagenes/emoticones/bubble-tea.png" alt="">Bubble tea</span>
+                <span><img class="emo" src="../imagenes/emoticones/menta.png" alt="">Infusiones</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="../programas/animaciones.js"></script>
+  <script src="../programas/pestanas.js"></script>
+  <script src="../programas/teclado.js"></script>
+  <script src="../programas/fondo.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EcoCafé</title>
+  <meta name="description" content="EcoCafé: envase de acero inoxidable con diseño único para tomar tus bebidas sin generar basura. Envase S/ 15, café S/ 6 con tu envase.">
+  <link rel="icon" href="imagenes/logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Titan+One&display=swap">
+  <link rel="stylesheet" href="estilos/base.css">
+  <link rel="stylesheet" href="estilos/menu.css">
+  <link rel="stylesheet" href="estilos/piezas.css">
+  <link rel="stylesheet" href="estilos/inicio.css">
+  <link rel="stylesheet" href="estilos/paginas.css">
+  <link rel="stylesheet" href="estilos/adaptacion.css">
+</head>
+<body>
+  <div class="fondo" aria-hidden="true"></div>
+
+  <div class="lienzo">
+    <header class="menu">
+      <div class="marca"><img src="imagenes/logo.jpg" alt="">EcoCafé</div>
+      <nav aria-label="Páginas">
+        <a href="index.html" aria-current="page"><img src="imagenes/emoticones/casa.png" alt="">Inicio</a>
+        <a href="paginas/nosotros.html"><img src="imagenes/emoticones/oso.png" alt="">Nosotros</a>
+        <a href="paginas/impacto.html"><img src="imagenes/emoticones/hoja.png" alt="">Impacto</a>
+        <a href="paginas/lugares.html"><img src="imagenes/emoticones/mapa.png" alt="">Lugares</a>
+        <a href="paginas/disenos.html"><img src="imagenes/emoticones/panda.png" alt="">Diseños</a>
+        <a href="paginas/pasos.html"><img src="imagenes/emoticones/granos.png" alt="">Pasos</a>
+        <a href="paginas/pedir.html"><img src="imagenes/emoticones/monedas.png" alt="">Pedir</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="pagina inicio" id="inicio">
+        <div class="portada caja cols" style="--c:1.15fr .85fr">
+          <div class="sello">Envase<b>S/ 15</b>pago único</div>
+          <div class="portada-texto">
+            <h1>Un envase para todas tus bebidas</h1>
+            <p>Un envase de acero inoxidable con diseño único. Llénalo con tus bebidas y llévalo a donde vayas.</p>
+            <div class="botones">
+              <a class="btn principal" href="paginas/pedir.html">Pedir mi envase</a>
+              <a class="btn" href="paginas/impacto.html">Ver el impacto</a>
+            </div>
+            <div class="etiquetas"><span>Café S/ 6 con tu envase</span><span>Acero inoxidable</span><span>Diseños únicos</span></div>
+          </div>
+          <div class="portada-fotos">
+            <img class="logo-portada" src="imagenes/logo.jpg" alt="Logo de EcoCafé con tres osos y un vaso de café">
+            <div class="vasos">
+              <div><img src="imagenes/vaso-cafe.jpg" alt="Envase EcoCafé con diseño café"></div>
+              <div><img src="imagenes/vaso-frio.jpg" alt="Vaso EcoCafé para bebidas frías"></div>
+              <div><img src="imagenes/vaso-bosque.jpg" alt="Envase EcoCafé con diseño de bosque"></div>
+            </div>
+          </div>
+          <img class="adorno hoja" src="imagenes/emoticones/hoja-larga.png" alt="">
+          <img class="adorno taza" src="imagenes/emoticones/taza.png" alt="">
+        </div>
+        <div class="cols inclinadas" style="--c:repeat(4,1fr)">
+          <a class="caja acceso" href="paginas/impacto.html"><img class="emo" src="imagenes/emoticones/hoja.png" alt=""><span><b>Impacto</b><small>365 vasos menos al año</small></span></a>
+          <a class="caja acceso" href="paginas/lugares.html"><img class="emo" src="imagenes/emoticones/pin.png" alt=""><span><b>Lugares</b><small>Clases, trabajo y hogar</small></span></a>
+          <a class="caja acceso" href="paginas/disenos.html"><img class="emo" src="imagenes/emoticones/taza.png" alt=""><span><b>Diseños</b><small>Cuatro modelos únicos</small></span></a>
+          <a class="caja acceso" href="paginas/pasos.html"><img class="emo" src="imagenes/emoticones/granos.png" alt=""><span><b>Pasos</b><small>Compra, trae y ahorra</small></span></a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="programas/animaciones.js"></script>
+  <script src="programas/pestanas.js"></script>
+  <script src="programas/teclado.js"></script>
+  <script src="programas/fondo.js"></script>
+</body>
+</html>

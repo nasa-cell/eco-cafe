@@ -1,0 +1,21 @@
+/* inicio */
+.portada { position: relative; padding: 1.3em 1.6em; }
+.portada-texto { display: flex; flex-direction: column; gap: .9em; justify-content: center; align-items: flex-start; }
+.portada h1 { font-size: 2.9em; line-height: 1.03; text-wrap: balance; }
+.portada-fotos { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.logo-portada { width: 14em; aspect-ratio: 3/2; object-fit: cover; border-radius: 1.2em; border: var(--borde); background: var(--negro-foto); }
+.vasos { display: flex; justify-content: center; gap: 1em; margin-top: -1em; }
+.vasos div { background: var(--negro-foto); border: var(--borde); border-radius: 1em; padding: .3em; width: 7em; animation: flotar 3.6s var(--vaiven) infinite alternate; }
+.vasos div:nth-child(1) { rotate: -6deg; }
+.vasos div:nth-child(2) { animation-delay: -1.2s; }
+.vasos div:nth-child(3) { rotate: 6deg; animation-delay: -2.4s; }
+.vasos img, .disenos img, .foto-pedido img { width: 100%; aspect-ratio: 2/3; object-fit: cover; border-radius: .7em; display: block; }
+.sello { position: absolute; top: -.9em; right: -.5em; z-index: 1; width: 6.2em; height: 6.2em; border-radius: 50%; background: var(--naranja); border: var(--borde); display: grid; place-content: center; text-align: center; line-height: 1.05; rotate: 10deg; animation: menear 2.6s var(--vaiven) infinite alternate; font-weight: 800; font-size: .85em; }
+.sello b { font-family: var(--titulos); font-weight: 400; font-size: 1.9em; display: block; }
+.adorno { position: absolute; z-index: 1; width: 4.6em; height: auto; pointer-events: none; }
+.adorno.hoja { left: -1.6em; top: -1.8em; rotate: -25deg; }
+.adorno.taza { right: -1.2em; bottom: -1.4em; animation: flotar 3.8s var(--vaiven) infinite alternate; }
+.acceso { display: flex; align-items: center; gap: .7em; padding: .7em .9em; text-align: left; transition: transform 180ms var(--salida); }
+.acceso span { display: flex; flex-direction: column; line-height: 1.2; min-width: 0; }
+.acceso b { font-size: 1.1em; }
+.acceso small { font-size: .78em; }

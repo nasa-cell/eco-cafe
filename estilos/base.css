@@ -1,0 +1,55 @@
+/* Cada página ocupa una pantalla 16:9 que se agranda o achica completa, sin scroll.
+   Todo se mide en "em" para que escale junto con el tamaño de letra del body. */
+:root {
+  --fondo: #e3f25a;
+  --mancha: #cfe53f;
+  --tinta: #17300f;
+  --crema: #fff7df;
+  --naranja: #ff8a3d;
+  --negro-foto: #000;
+  --titulos: "Titan One", system-ui, sans-serif;
+  --texto: "Baloo 2", system-ui, sans-serif;
+  --radio: 1.5em;
+  --borde: .19em solid var(--tinta);
+  --sombra: .38em .38em 0 var(--tinta);
+  --salida: cubic-bezier(0.23, 1, 0.32, 1);
+  --vaiven: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+html, body { height: 100%; margin: 0; }
+body {
+  font-family: var(--texto);
+  font-weight: 500;
+  font-size: min(1.5385vw, 2.735vh);
+  line-height: 1.36;
+  color: var(--tinta);
+  background: var(--fondo);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+h1, h2, h3, p, ul, figure { margin: 0; }
+ul { padding-left: 1.1em; display: flex; flex-direction: column; gap: .2em; }
+button { font: inherit; color: inherit; cursor: pointer; }
+button:focus-visible, a:focus-visible { outline: .19em solid var(--tinta); outline-offset: .15em; }
+h1, h2, h3, .num, .marca, .fono, figcaption, .pestanas button, .acceso b, .lugares button { font-family: var(--titulos); font-weight: 400; }
+h3 { font-size: 1.14em; line-height: 1.15; }
+.chico { font-size: .9em; }
+
+/* fondo: manchas redondas y hojas que se mecen */
+.fondo { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.fondo::before, .fondo::after { content: ""; position: absolute; border-radius: 50%; background: var(--mancha); width: 42vw; aspect-ratio: 1; }
+.fondo::before { top: -16vh; right: -10vw; }
+.fondo::after { bottom: -24vh; left: -12vw; }
+.fondo img { position: absolute; height: auto; rotate: var(--giro); animation: mecer var(--tiempo) var(--vaiven) infinite alternate; }
+
+@keyframes mecer { to { transform: rotate(18deg) translateY(-.7em); } }
+@keyframes flotar { to { transform: translateY(-.5em); } }
+@keyframes menear { to { transform: rotate(-16deg); } }
+
+/* lienzo */
+.lienzo { width: 65em; height: 36.5em; padding: 1.2em 2.2em 1.4em; display: grid; grid-template-rows: auto minmax(0, 1fr); gap: 1.1em; }
+main { display: grid; grid-template-rows: minmax(0, 1fr); min-height: 0; }
