@@ -10,6 +10,7 @@
 .centro { justify-content: center; }
 .fila-emo { display: flex; align-items: center; gap: .6em; }
 .emo { width: 2.6em; height: 2.6em; object-fit: contain; flex: none; }
+.emo.chica { width: 1.9em; height: 1.9em; }
 .num { line-height: 1; font-variant-numeric: tabular-nums; }
 .numero-paso { width: 2.4em; height: 2.4em; border-radius: 50%; background: var(--tinta); color: var(--crema); display: grid; place-items: center; flex: none; font-family: var(--titulos); font-size: 1.1em; }
 .inclinadas > :nth-child(odd) { rotate: -1deg; }
