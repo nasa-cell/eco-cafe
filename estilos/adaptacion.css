@@ -7,21 +7,94 @@
 /* En celular la pantalla deja de ser fija: las piezas se apilan y se baja con el dedo. */
 /* También se usa en tabletas en vertical y en celulares echados, donde la pantalla fija quedaría con letra muy chica. */
 @media (max-width: 700px), (max-width: 1100px) and (orientation: portrait), (max-height: 500px) {
-  body { font-size: clamp(15px, 2.4vw, 19px); display: block; overflow: auto; }
-  .lienzo { width: auto; max-width: 46em; height: auto; margin-inline: auto; padding: 1em 1em 2em; }
-  main, .pagina, .pagina.inicio, .cols { grid-template-columns: 1fr; grid-template-rows: none; }
-  .vasos { gap: .5em; }
-  .vasos div { width: 30%; }
-  .vasos div:nth-child(2) { width: 36%; }
-  .logo-portada { width: min(14em, 100%); }
-  .menu { height: auto; flex-wrap: wrap; }
-  .menu nav { flex-wrap: wrap; }
-  .lugares, .disenos, .bebidas { grid-template-columns: repeat(2, 1fr); }
-  .portada h1 { font-size: 2em; max-width: calc(100% - 2.4em); }
-  .banner { padding-right: 1.3em; }
-  .banner h2 { font-size: 1.5em; }
-  .banner .emoticones, .adorno { display: none; }
+  body { font-size: clamp(15px, 2.4vw, 19px); display: block; overflow-x: hidden; overflow-y: auto; overscroll-behavior-x: none; }
+  .lienzo { width: auto; max-width: 46em; height: auto; margin-inline: auto; padding: .8em .9em 6em; gap: .8em; grid-template-columns: minmax(0, 1fr); }
+  main, .pagina, .pagina.inicio, .cols { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; }
+  .pagina, .cols { gap: .8em; }
   .fondo img { width: min(16vw, 90px) !important; }
+  .adorno { display: none; }
+  .btn { padding: .8em 1.3em; }
+
+  /* el menú pasa a ser una barra fija abajo, con los siete emoticones */
+  .menu { position: relative; z-index: 6; height: auto; justify-content: center; }
+  .menu nav { position: fixed; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 0; background: var(--tinta); padding: .4em max(.3em, env(safe-area-inset-right)) calc(.4em + env(safe-area-inset-bottom)) max(.3em, env(safe-area-inset-left)); border-radius: 1.2em 1.2em 0 0; }
+  .menu nav a { flex-direction: column; justify-content: center; gap: .15em; background: none; border: 0; box-shadow: none; color: var(--crema); font-size: .62em; padding: .5em 0 .4em; border-radius: 1.1em; min-width: 0; }
+  .menu nav img { width: 2.9em; height: 2.9em; }
+  .menu nav a[aria-current] { background: var(--naranja); color: var(--tinta); transform: none; }
+
+  /* portada: los dos videos arriba, lado a lado, y debajo el texto. Los accesos sobran porque la barra ya lleva a todas las páginas. */
+  .portada { padding: 1em 1em 1.2em; gap: .9em; }
+  .portada-fotos { order: -1; flex-direction: row; gap: .6em; }
+  .logo-portada { flex: 9 1 0; width: auto; min-width: 0; }
+  .vasos { flex: 4 1 0; min-width: 0; margin: 0; display: block; }
+  .vasos div, .vasos div:nth-child(2) { width: 100%; padding: .2em; animation: none; }
+  .vasos div:nth-child(odd), .portada .etiquetas, .pagina.inicio > .inclinadas { display: none; }
+  .portada h1 { font-size: 2em; }
+  .sello { font-size: .62em; top: -1.2em; right: -.6em; }
+  .botones { width: 100%; }
+  .botones .btn { flex: 1 1 0; text-align: center; padding: .85em .5em; }
+
+  .banner { padding: .7em 4.6em .7em 1.1em; }
+  .banner h2 { font-size: 1.4em; }
+  .banner p { font-size: .92em; }
+  .banner .emoticones { right: .5em; bottom: -.5em; }
+  .banner .emoticones img { height: 3.6em; }
+  .banner .emoticones img:nth-child(n+2) { display: none; }
+
+  /* nosotros: el logo ya se ve en la portada */
+  .logo-grande, #nosotros .etiquetas { display: none; }
+  #nosotros .cols .cols { grid-template-columns: 1fr 1fr; }
+
+  /* impacto: número a la izquierda y su texto al lado */
+  #impacto .grupo > .cols > .caja { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: .8em; align-items: center; }
+  #impacto .caja.oscura .num { grid-row: span 2; }
+  .gran-numero { font-size: 3.2em; }
+  #impacto .numero-medio { font-size: 1.8em; }
+  #impacto [data-panel="ayuda"], #impacto [data-panel="comparacion"] { grid-template-columns: 1fr 1fr; }
+  #impacto [data-panel] .caja { padding: .7em .8em; }
+  #impacto [data-panel="ayuda"] .fila-emo { gap: .4em; }
+  #impacto [data-panel="ayuda"] .emo { width: 2em; height: 2em; }
+  #impacto [data-panel="ayuda"] h3 { font-size: 1em; }
+  .pestanas:not(.vertical) { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .4em; }
+  .pestanas:not(.vertical) button { padding: 1em .2em; font-size: .82em; line-height: 1.1; }
+
+  /* lugares: tres arriba y dos abajo */
+  .lugares { grid-template-columns: repeat(6, 1fr); gap: .6em; }
+  .lugares button { grid-column: span 2; padding: .6em .2em; font-size: .88em; box-shadow: .28em .28em 0 var(--tinta); }
+  .lugares button:nth-child(n+4) { grid-column: span 3; }
+  .lugares button[aria-selected="true"] { transform: translate(.28em, .28em); }
+  .detalle h2 { font-size: 1.6em; }
+  .detalle p { font-size: 1.05em; }
+  .bebidas { grid-template-columns: repeat(2, 1fr); }
+
+  /* diseños: los cuatro envases enteros en dos filas bajas */
+  .disenos { grid-template-columns: 1fr 1fr; gap: .7em; }
+  .disenos img { aspect-ratio: auto; height: 9.5em; object-fit: contain; }
+
+  /* pasos: las preguntas en dos columnas */
+  .pestanas.vertical { display: grid; grid-template-columns: 1fr 1fr; gap: .5em; }
+  .pestanas.vertical button { padding: .6em .7em; font-size: .9em; line-height: 1.15; }
+  .respuesta h2 { font-size: 1.3em; }
+
+  /* pedir: los dos precios juntos y la foto al lado del teléfono */
+  #pedir .inclinadas { grid-template-columns: 1fr 1fr; }
+  .precio { padding: .8em; }
+  .precio h3 { font-size: 1em; }
+  .precio .num { font-size: 2.5em; }
+  .pedido { grid-template-columns: minmax(0, 1.7fr) minmax(0, .8fr); padding: 1.1em; }
+  .pedido h2 { font-size: 1.5em; }
+  .fono { font-size: 1.55em; white-space: nowrap; }
+  .pedido .btn { padding-inline: .9em; }
+  .foto-pedido { width: 100%; }
+}
+
+/* Celular echado: la barra se hace más baja y el contenido aprovecha el ancho en dos columnas. */
+@media (max-height: 500px) and (orientation: landscape) {
+  .lienzo { max-width: none; padding-bottom: 4.2em; }
+  .menu nav a { flex-direction: row; gap: .4em; font-size: .72em; padding: .6em 0; }
+  .menu nav img { width: 2em; height: 2em; }
+  .pagina > .cols { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+  .portada-fotos { order: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
