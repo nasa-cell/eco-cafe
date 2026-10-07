@@ -12,6 +12,7 @@
   main, .pagina, .pagina.inicio, .cols { grid-template-columns: 1fr; grid-template-rows: none; }
   .vasos { gap: .5em; }
   .vasos div { width: 30%; }
+  .vasos div:nth-child(2) { width: 36%; }
   .logo-portada { width: min(14em, 100%); }
   .menu { height: auto; flex-wrap: wrap; }
   .menu nav { flex-wrap: wrap; }
