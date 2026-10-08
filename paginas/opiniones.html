@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Opiniones | EcoCafé</title>
+  <meta name="description" content="Opiniones sobre EcoCafé: deja tu comentario y tus estrellas sobre el envase de acero inoxidable con diseño único.">
+  <link rel="icon" href="../imagenes/logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Titan+One&display=swap">
+  <link rel="stylesheet" href="../estilos/base.css">
+  <link rel="stylesheet" href="../estilos/menu.css">
+  <link rel="stylesheet" href="../estilos/piezas.css">
+  <link rel="stylesheet" href="../estilos/inicio.css">
+  <link rel="stylesheet" href="../estilos/paginas.css">
+  <link rel="stylesheet" href="../estilos/opiniones.css">
+  <link rel="stylesheet" href="../estilos/adaptacion.css">
+</head>
+<body>
+  <div class="fondo" aria-hidden="true"></div>
+
+  <div class="lienzo">
+    <header class="menu">
+      <div class="marca"><img src="../imagenes/logo.jpg" alt="">EcoCafé</div>
+      <nav aria-label="Páginas">
+        <a href="../index.html"><img src="../imagenes/emoticones/casa.png" alt="">Inicio</a>
+        <a href="nosotros.html"><img src="../imagenes/emoticones/oso.png" alt="">Nosotros</a>
+        <a href="impacto.html"><img src="../imagenes/emoticones/hoja.png" alt="">Impacto</a>
+        <a href="lugares.html"><img src="../imagenes/emoticones/mapa.png" alt="">Lugares</a>
+        <a href="disenos.html"><img src="../imagenes/emoticones/panda.png" alt="">Diseños</a>
+        <a href="pasos.html"><img src="../imagenes/emoticones/granos.png" alt="">Pasos</a>
+        <a href="pedir.html"><img src="../imagenes/emoticones/monedas.png" alt="">Pedir</a>
+        <a href="opiniones.html" aria-current="page"><img src="../imagenes/emoticones/oso-polar.png" alt="">Opiniones</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="pagina" id="opiniones">
+        <div class="banner">
+          <h2>Lo que dicen de EcoCafé</h2>
+          <p>Opiniones de quienes ya conocen el envase. Deja la tuya y ponle estrellas.</p>
+          <div class="emoticones"><img src="../imagenes/emoticones/oso-polar.png" alt=""></div>
+        </div>
+        <div class="cols" style="--c:.62fr 1.38fr">
+          <div class="caja pila centro nota">
+            <div class="num gran-numero" data-promedio>0,0</div>
+            <div class="estrellas grandes" data-estrellas-promedio></div>
+            <p class="chico" data-total>Cargando opiniones…</p>
+            <div class="barras" data-barras></div>
+            <button class="btn principal" type="button" data-abrir>Dejar mi opinión</button>
+          </div>
+          <div class="cols" style="--c:1fr;--filas:minmax(0,1fr) auto">
+            <div class="tarjetas inclinadas" data-tarjetas aria-live="polite"></div>
+            <div class="pie-opiniones">
+              <div class="orden" role="group" aria-label="Orden de las opiniones">
+                <button type="button" data-orden="recientes" aria-pressed="true">Recientes</button>
+                <button type="button" data-orden="mejores" aria-pressed="false">Mejor puntuadas</button>
+              </div>
+              <p class="chico" data-aviso-carga hidden>No se pudieron cargar las opiniones nuevas. Revisa tu internet.</p>
+              <div class="paso" data-paso hidden>
+                <button type="button" data-anterior aria-label="Opiniones anteriores">‹</button>
+                <div class="puntos" data-puntos></div>
+                <button type="button" data-siguiente aria-label="Opiniones siguientes">›</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog class="cuadro-opinion" data-cuadro aria-labelledby="titulo-cuadro">
+    <form class="caja naranja pila" method="dialog" novalidate>
+      <h2 id="titulo-cuadro">Deja tu opinión</h2>
+      <div class="rostros">
+        <label class="subir" data-subir>
+          <input type="file" accept="image/*" hidden data-foto>
+          <span>Subir<br>foto</span>
+        </label>
+        <b>o</b>
+        <button type="button" data-osito="oso" aria-label="Oso pardo"><img src="../imagenes/emoticones/oso.png" alt=""></button>
+        <button type="button" data-osito="panda" aria-label="Oso panda"><img src="../imagenes/emoticones/panda.png" alt=""></button>
+        <button type="button" data-osito="oso-polar" aria-label="Oso polar"><img src="../imagenes/emoticones/oso-polar.png" alt=""></button>
+      </div>
+      <div class="ajuste" data-ajuste hidden>
+        <canvas width="128" height="128" data-lienzo-foto aria-label="Vista de tu foto"></canvas>
+        <div class="pila">
+          <p class="chico"><strong>Arrastra la foto</strong> para acomodarla.</p>
+          <label class="acercar">Acercar <input type="range" min="1" max="3" step="0.05" value="1" data-acercar></label>
+          <div class="mover">
+            <button type="button" data-mover="-1,0" aria-label="Mover la foto a la izquierda">←</button>
+            <button type="button" data-mover="1,0" aria-label="Mover la foto a la derecha">→</button>
+            <button type="button" data-mover="0,-1" aria-label="Mover la foto hacia arriba">↑</button>
+            <button type="button" data-mover="0,1" aria-label="Mover la foto hacia abajo">↓</button>
+          </div>
+        </div>
+      </div>
+      <input class="campo" type="text" placeholder="Tu nombre o apodo" maxlength="20" autocomplete="off" aria-label="Tu nombre o apodo" data-nombre>
+      <div class="poner-estrellas" role="group" aria-label="Tus estrellas" data-poner>
+        <button type="button" aria-label="1 estrella">★</button>
+        <button type="button" aria-label="2 estrellas">★</button>
+        <button type="button" aria-label="3 estrellas">★</button>
+        <button type="button" aria-label="4 estrellas">★</button>
+        <button type="button" aria-label="5 estrellas">★</button>
+      </div>
+      <textarea class="campo alto" placeholder="¿Qué te pareció?" maxlength="200" aria-label="Tu opinión" data-texto></textarea>
+      <p class="aviso" role="alert" data-aviso hidden></p>
+      <div class="pie-cuadro">
+        <span class="cuenta" data-cuenta>0 / 200 letras</span>
+        <div class="botones">
+          <button class="btn" type="button" data-cancelar>Cancelar</button>
+          <button class="btn principal" type="submit" data-publicar>Publicar</button>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="../programas/animaciones.js"></script>
+  <script src="../programas/pestanas.js"></script>
+  <script src="../programas/teclado.js"></script>
+  <script src="../programas/fondo.js"></script>
+  <script src="../programas/conexion-opiniones.js"></script>
+  <script src="../programas/opiniones-ejemplo.js"></script>
+  <script src="../programas/opiniones.js"></script>
+  <script src="../programas/puente-conexiones.js" defer></script>
+</body>
+</html>

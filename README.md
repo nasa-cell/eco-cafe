@@ -17,14 +17,23 @@ Página web del emprendimiento **EcoCafé**: un envase de acero inoxidable con d
 | Diseños | `paginas/disenos.html` |
 | Pasos | `paginas/pasos.html` |
 | Precios y pedido | `paginas/pedir.html` |
+| Opiniones | `paginas/opiniones.html` |
 
 ## Carpetas
 
 - `paginas/`: las páginas internas.
 - `estilos/`: colores, menú, cuadros y adaptación a celular.
-- `programas/`: animaciones, pestañas, teclado, fondo de hojas y el puente para manejar la página desde el celular con Conexiones.
-- `imagenes/`: logo, fotos de los envases y emoticones.
+- `programas/`: animaciones, pestañas, teclado, fondo de hojas, opiniones y el puente para manejar la página desde el celular con Conexiones.
+- `imagenes/`: logo, fotos de los envases, emoticones y fotos de perfil de las opiniones de ejemplo.
 - `videos/`: el logo animado y el envase girando que se ven en la portada.
+
+## Opiniones
+
+En la página Opiniones cualquiera deja su nombre o apodo, estrellas, comentario y, si quiere, una foto que puede acomodar. Antes de publicar se revisa el largo del texto, que no haya enlaces ni palabras ofensivas, y se espera un minuto entre opiniones.
+
+- Las opiniones se guardan en Firestore (Firebase). Los datos del proyecto van en `programas/conexion-opiniones.js`; si están vacíos, la página funciona en modo de prueba y guarda solo en el navegador.
+- `programas/opiniones-ejemplo.js` trae opiniones de muestra, marcadas con la etiqueta «Ejemplo». Para quitarlas se deja la lista vacía.
+- Las fotos de `imagenes/perfiles/` vienen de Wikimedia Commons y son de dominio público o CC0.
 
 ## Cómo verla
 

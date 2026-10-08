@@ -1,0 +1,74 @@
+/* opiniones: nota general, tarjetas que se pasan y cuadro para escribir */
+.estrellas { font-size: 1.3em; line-height: 1; color: var(--naranja); -webkit-text-stroke: .09em var(--tinta); paint-order: stroke fill; letter-spacing: .06em; white-space: nowrap; }
+.estrellas .vacia { color: #efe6c6; }
+.estrellas.grandes { font-size: 2.1em; }
+.naranja .estrellas { color: var(--tinta); }
+.naranja .estrellas .vacia { color: #ffc49b; }
+
+.nota { align-items: center; text-align: center; gap: .35em; }
+.nota .gran-numero { font-size: 4.2em; }
+.barras { display: grid; gap: .2em; width: 100%; line-height: 1.15; }
+.barras div { display: grid; grid-template-columns: 1.2em 1fr; align-items: center; gap: .4em; font-weight: 800; }
+.barras i { height: .8em; border-radius: 999px; border: .13em solid var(--tinta); background: linear-gradient(90deg, var(--naranja) var(--p), #fff var(--p)); }
+
+.tarjetas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1em; padding: .4em .5em; min-height: 0; }
+.tarjeta { display: flex; flex-direction: column; align-items: center; text-align: center; gap: .4em; padding: 1em .9em; overflow: hidden; }
+.tarjeta h3 { font-size: 1.08em; }
+.tarjeta p { overflow-wrap: anywhere; min-height: 0; overflow-y: auto; scrollbar-width: thin; }
+.tarjeta.larga p { font-size: .86em; line-height: 1.28; }
+.tarjeta.muy-larga { gap: .25em; padding-block: .8em; }
+.tarjeta.muy-larga p { font-size: .76em; line-height: 1.25; }
+.tarjeta.muy-larga .rostro { width: 3em; height: 3em; }
+.rostro { width: 4.4em; height: 4.4em; object-fit: contain; flex: none; }
+.rostro.foto { border-radius: 50%; border: var(--borde); object-fit: cover; background: var(--negro-foto); }
+.sin-opiniones { grid-column: 1 / -1; align-self: center; justify-self: center; text-align: center; max-width: 24em; rotate: none !important; }
+.sin-opiniones .emo { width: 4.4em; height: 4.4em; align-self: center; }
+
+.cuando { font-size: .8em; font-weight: 700; opacity: .85; display: flex; align-items: center; gap: .5em; }
+.nota-chica { font-size: .82em; opacity: .75; }
+
+.pie-opiniones { display: flex; justify-content: space-between; align-items: center; gap: 1em; min-height: 2.6em; }
+.orden { display: flex; gap: .5em; }
+.orden button { font-family: var(--titulos); font-size: .9em; background: var(--crema); border: var(--borde); border-radius: 999px; padding: .3em 1em; transition: transform 140ms var(--salida); }
+.orden button[aria-pressed="true"] { background: var(--tinta); color: var(--crema); }
+.orden button:active { transform: scale(.97); }
+.paso { display: flex; justify-content: center; align-items: center; gap: .8em; }
+.paso button { width: 2.4em; height: 2.4em; border-radius: 50%; border: var(--borde); background: var(--crema); font-family: var(--titulos); line-height: 1; transition: transform 140ms var(--salida); }
+.paso button:active { transform: scale(.94); }
+.paso button:disabled { opacity: .4; cursor: default; }
+.puntos { display: flex; align-items: center; gap: .5em; font-weight: 800; }
+.puntos span { width: .7em; height: .7em; border-radius: 50%; border: .13em solid var(--tinta); }
+.puntos span.aqui { background: var(--tinta); }
+
+/* cuadro para escribir la opinión */
+.cuadro-opinion { font: inherit; color: inherit; background: none; border: 0; padding: 1em; width: 32em; max-width: 100vw; max-height: 100dvh; }
+.cuadro-opinion::backdrop { background: rgba(23, 48, 15, .55); }
+.cuadro-opinion form { rotate: -1deg; gap: .7em; padding: 1.2em 1.4em; }
+.cuadro-opinion h2 { font-size: 1.7em; line-height: 1.1; }
+.campo { font: inherit; color: var(--tinta); width: 100%; background: #fff; border: var(--borde); border-radius: 1em; padding: .4em .8em; display: block; resize: none; }
+.campo.alto { height: 5.6em; }
+.campo:focus-visible { outline: .19em solid var(--tinta); outline-offset: .15em; }
+.rostros { display: flex; gap: .6em; align-items: center; }
+.rostros button { width: 3.3em; height: 3.3em; border-radius: 50%; border: .16em solid transparent; background: none; padding: .15em; flex: none; }
+.rostros button img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.rostros .elegido { background-color: var(--crema); border-color: var(--tinta); }
+.subir { width: 4.1em; height: 4.1em; border-radius: 50%; flex: none; background: var(--crema) center / cover no-repeat; border: .16em dashed var(--tinta); display: grid; place-items: center; text-align: center; font-weight: 800; font-size: .8em; line-height: 1.05; cursor: pointer; }
+.subir.elegido { border-style: solid; }
+.subir.con-foto span { display: none; }
+.subir.encima { background-color: #fff; transform: scale(1.08); }
+.subir:focus-within { outline: .19em solid var(--tinta); outline-offset: .15em; }
+.ajuste { display: flex; align-items: center; gap: .9em; background: var(--crema); border: var(--borde); border-radius: 1em; padding: .5em .8em; }
+.ajuste canvas { width: 5.4em; height: 5.4em; border-radius: 50%; border: var(--borde); flex: none; cursor: grab; touch-action: none; }
+.ajuste canvas:active { cursor: grabbing; }
+.ajuste .pila { gap: .3em; flex: 1; min-width: 0; }
+.acercar { display: flex; align-items: center; gap: .5em; font-weight: 800; font-size: .9em; }
+.acercar input { flex: 1; min-width: 0; accent-color: var(--tinta); }
+.mover { display: flex; gap: .4em; }
+.mover button { width: 2em; height: 2em; border-radius: 50%; border: .16em solid var(--tinta); background: #fff; font-weight: 800; line-height: 1; padding: 0; }
+.poner-estrellas { display: flex; gap: .15em; }
+.poner-estrellas button { background: none; border: 0; padding: 0; font-size: 2.3em; line-height: 1; color: #ffc49b; -webkit-text-stroke: .09em var(--tinta); paint-order: stroke fill; transition: transform 140ms var(--salida); }
+.poner-estrellas button.llena { color: var(--tinta); }
+.poner-estrellas button:active { transform: scale(.9); }
+.aviso { background: var(--tinta); color: var(--crema); border-radius: .8em; padding: .35em .8em; font-weight: 700; font-size: .9em; }
+.pie-cuadro { display: flex; justify-content: space-between; align-items: center; gap: .8em; }
+.cuenta { font-size: .8em; }

@@ -15,11 +15,11 @@
   .adorno { display: none; }
   .btn { padding: .8em 1.3em; }
 
-  /* el menú pasa a ser una barra fija abajo, con los siete emoticones */
+  /* el menú pasa a ser una barra fija abajo, con los ocho emoticones */
   .menu { position: relative; z-index: 6; height: auto; justify-content: center; }
-  .menu nav { position: fixed; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 0; background: var(--tinta); padding: .4em max(.3em, env(safe-area-inset-right)) calc(.4em + env(safe-area-inset-bottom)) max(.3em, env(safe-area-inset-left)); border-radius: 1.2em 1.2em 0 0; }
-  .menu nav a { flex-direction: column; justify-content: center; gap: .15em; background: none; border: 0; box-shadow: none; color: var(--crema); font-size: .62em; padding: .5em 0 .4em; border-radius: 1.1em; min-width: 0; }
-  .menu nav img { width: 2.9em; height: 2.9em; }
+  .menu nav { position: fixed; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 0; background: var(--tinta); padding: .4em max(.3em, env(safe-area-inset-right)) calc(.4em + env(safe-area-inset-bottom)) max(.3em, env(safe-area-inset-left)); border-radius: 1.2em 1.2em 0 0; }
+  .menu nav a { flex-direction: column; justify-content: center; gap: .15em; background: none; border: 0; box-shadow: none; color: var(--crema); font-size: .55em; padding: .5em 0 .4em; border-radius: 1.1em; min-width: 0; }
+  .menu nav img { width: 3.2em; height: 3.2em; }
   .menu nav a[aria-current] { background: var(--naranja); color: var(--tinta); transform: none; }
 
   /* portada: los dos videos arriba, lado a lado, y debajo el texto. Los accesos sobran porque la barra ya lleva a todas las páginas. */
@@ -86,12 +86,32 @@
   .fono { font-size: 1.55em; white-space: nowrap; }
   .pedido .btn { padding-inline: .9em; }
   .foto-pedido { width: 100%; }
+
+  /* opiniones: la nota en dos columnas y las tarjetas una debajo de otra, con el rostro a la izquierda */
+  .nota { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: .9em; row-gap: .3em; align-items: center; text-align: left; }
+  .nota .gran-numero { grid-row: span 2; }
+  .nota .estrellas.grandes { font-size: 1.6em; }
+  .nota .barras, .nota .btn { grid-column: 1 / -1; }
+  .nota .btn { text-align: center; }
+  .tarjetas { grid-template-columns: minmax(0, 1fr); gap: .7em; padding: 0; }
+  .tarjeta { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: .8em; row-gap: .1em; text-align: left; align-items: center; padding: .7em .9em; rotate: none !important; }
+  .tarjeta .rostro { grid-row: span 2; width: 3.4em; height: 3.4em; }
+  .tarjeta p { grid-column: 1 / -1; }
+  .tarjeta h3 { grid-column: 2; }
+  .tarjeta .estrellas, .tarjeta .cuando { grid-column: 2; }
+  .tarjeta .rostro { grid-row: span 3; }
+  .pie-opiniones { flex-wrap: wrap; justify-content: center; }
+  .paso button { width: 2.9em; height: 2.9em; }
+  .cuadro-opinion { width: 100vw; padding: .6em; }
+  .cuadro-opinion form { rotate: none; padding: 1em; }
+  .rostros { gap: .4em; }
+  .pie-cuadro { flex-wrap: wrap; }
 }
 
 /* Celular echado: la barra se hace más baja y el contenido aprovecha el ancho en dos columnas. */
 @media (max-height: 500px) and (orientation: landscape) {
   .lienzo { max-width: none; padding-bottom: 4.2em; }
-  .menu nav a { flex-direction: row; gap: .4em; font-size: .72em; padding: .6em 0; }
+  .menu nav a { flex-direction: row; gap: .4em; font-size: .64em; padding: .6em 0; }
   .menu nav img { width: 2em; height: 2em; }
   .pagina > .cols { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
   .portada-fotos { order: 0; }
