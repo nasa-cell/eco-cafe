@@ -14,6 +14,16 @@ const ESPERA = 60000;
 const LADO_FOTO = 128;
 const INICIO_FOTO = 'data:image/jpeg;base64,';
 const UN_DIA = 86400000;
+const TIEMPO_ENVIO = 12000;
+const PAUSAS = [1000, 3000];
+const ESPERA_EJEMPLOS = 1500;
+const LETRAS_CLAVE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+const AVISOS = {
+  'sin-internet': 'No hay conexión a internet. Tu opinión no se borró: conéctate y toca Publicar.',
+  lento: 'El internet está muy lento y no se pudo enviar. Tu opinión no se borró: toca Publicar otra vez.',
+  ocupado: 'El servicio está ocupado. Espera un momento y toca Publicar otra vez.',
+  rechazado: 'No se pudo guardar esta opinión. Prueba sin foto o cambia un poco el texto.'
+};
 
 // Las palabras que no se publican van en clave para que no se lean a simple vista en el código.
 // Para cambiar la lista: escribirlas separadas por comas, sin tildes, y pasarlas a base64.
@@ -34,6 +44,7 @@ const tarjetas = elemento('[data-tarjetas]'), paso = elemento('[data-paso]'), pu
 let opiniones = [], hoja = 0, orden = 'recientes';
 let elegido = { osito: 'oso', foto: '', estrellas: 0 };
 let fotoOriginal = null, ajuste = { x: 0, y: 0, zoom: 1 };
+let publicando = false, claveEnvio = '', cargaPendiente = false;
 
 // --- condiciones antes de publicar ---
 
@@ -94,12 +105,39 @@ function guardarLocal(clave, valor) {
   try { localStorage.setItem(clave, JSON.stringify(valor)); } catch { /* sin espacio o en modo privado */ }
 }
 
-async function pedir(ruta, cuerpo) {
-  const respuesta = await fetch(direccion + ruta + (llave ? `?key=${llave}` : ""), {
-    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(cuerpo)
-  });
-  if (!respuesta.ok) throw new Error(`Firestore respondió ${respuesta.status}`);
-  return respuesta.json();
+const fallo = tipo => Object.assign(new Error(tipo), { tipo });
+
+async function pedirUnaVez(ruta, cuerpo, parametros) {
+  const consulta = new URLSearchParams({ ...parametros, ...(llave && { key: llave }) }).toString();
+  const corte = new AbortController();
+  const reloj = setTimeout(() => corte.abort(), TIEMPO_ENVIO);
+  try {
+    const respuesta = await fetch(direccion + ruta + (consulta ? `?${consulta}` : ''), {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(cuerpo), signal: corte.signal
+    });
+    if (respuesta.ok) return await respuesta.json();
+    if (respuesta.status === 409) throw fallo('repetido');
+    throw fallo(respuesta.status === 429 || respuesta.status >= 500 ? 'ocupado' : 'rechazado');
+  } catch (error) {
+    if (error.tipo) throw error;
+    throw fallo(error.name === 'AbortError' ? 'lento' : 'sin-internet');
+  } finally {
+    clearTimeout(reloj);
+  }
+}
+
+// Si el internet está lento o se corta un momento, se vuelve a intentar solo antes de avisar.
+// Lo que el servidor rechaza no se reintenta: volvería a fallar igual.
+async function pedir(ruta, cuerpo, parametros = {}, alReintentar = () => {}) {
+  for (let intento = 0; ; intento++) {
+    try {
+      return await pedirUnaVez(ruta, cuerpo, parametros);
+    } catch (error) {
+      if (error.tipo === 'rechazado' || error.tipo === 'repetido' || intento >= PAUSAS.length) throw error;
+      alReintentar();
+      await new Promise(listo => setTimeout(listo, PAUSAS[intento]));
+    }
+  }
 }
 
 async function leerOpiniones() {
@@ -115,13 +153,19 @@ async function leerOpiniones() {
   }));
 }
 
-async function guardarOpinion(opinion) {
+// Cada opinión viaja con una clave propia. Si un envío llegó pero su respuesta se perdió en el camino,
+// el reintento choca con esa clave («repetido») y se sabe que ya estaba guardada: no sale dos veces.
+async function guardarOpinion(opinion, clave, alReintentar) {
   if (!enLinea) return guardarLocal('opiniones-prueba', [opinion, ...leerLocal('opiniones-prueba', [])].slice(0, MAXIMO));
-  await pedir('/opiniones', { fields: {
-    nombre: { stringValue: opinion.nombre }, texto: { stringValue: opinion.texto },
-    estrellas: { integerValue: String(opinion.estrellas) }, osito: { stringValue: opinion.osito },
-    foto: { stringValue: opinion.foto }, fecha: { timestampValue: new Date(opinion.fecha).toISOString() }
-  } });
+  try {
+    await pedir('/opiniones', { fields: {
+      nombre: { stringValue: opinion.nombre }, texto: { stringValue: opinion.texto },
+      estrellas: { integerValue: String(opinion.estrellas) }, osito: { stringValue: opinion.osito },
+      foto: { stringValue: opinion.foto }, fecha: { timestampValue: new Date(opinion.fecha).toISOString() }
+    } }, { documentId: clave }, alReintentar);
+  } catch (error) {
+    if (error.tipo !== 'repetido') throw error;
+  }
 }
 
 // --- mostrar ---
@@ -327,6 +371,7 @@ function abrirCuadro() {
   formulario.reset();
   quitarFoto();
   elegido = { osito: 'oso', foto: '', estrellas: 0 };
+  claveEnvio = Array.from(crypto.getRandomValues(new Uint8Array(20)), numero => LETRAS_CLAVE[numero % LETRAS_CLAVE.length]).join('');
   avisar('');
   marcarRostro();
   marcarEstrellas();
@@ -336,25 +381,29 @@ function abrirCuadro() {
 
 async function publicar(evento) {
   evento.preventDefault();
+  if (publicando) return;
   const opinion = { nombre: campoNombre.value.trim().replace(/\s+/g, ' '), texto: campoTexto.value.trim().replace(/\s+/g, ' '), ...elegido, fecha: Date.now() };
   const falta = revisar(opinion);
   if (falta) return avisar(falta);
   const resta = ESPERA - (Date.now() - leerLocal('opinion-ultima', 0));
   if (resta > 0) return avisar(`Espera ${Math.ceil(resta / 1000)} segundos para publicar otra opinión.`);
 
+  publicando = true;
   botonPublicar.disabled = true;
   botonPublicar.textContent = 'Publicando…';
+  avisar('');
   try {
-    await guardarOpinion(opinion);
+    await guardarOpinion(opinion, claveEnvio, () => { botonPublicar.textContent = 'Reintentando…'; });
     guardarLocal('opinion-ultima', Date.now());
     opiniones.unshift(opinion);
     hoja = 0;
     elegirOrden('recientes');
     mostrarTodo();
     cuadro.close();
-  } catch {
-    avisar('No se pudo publicar. Revisa tu internet y vuelve a intentar.');
+  } catch (error) {
+    avisar(AVISOS[error.tipo] ?? AVISOS['sin-internet']);
   }
+  publicando = false;
   botonPublicar.disabled = false;
   botonPublicar.textContent = 'Publicar';
 }
@@ -421,12 +470,30 @@ document.querySelectorAll('[data-mover]').forEach(boton => boton.addEventListene
 // Dentro del cuadro las flechas mueven el cursor al escribir; no deben pasar de página.
 cuadro.addEventListener('keydown', evento => evento.stopPropagation());
 
-leerOpiniones()
-  .catch(() => {
-    elemento('[data-aviso-carga]').hidden = false;
-    return [];
-  })
-  .then(lista => {
-    opiniones = [...lista.map(ordenar).filter(Boolean), ...ejemplos()];
+// Si las opiniones guardadas tardan en llegar, se muestran primero las de ejemplo para no dejar la página vacía.
+// Si no llegan, se vuelven a pedir en cuanto regresa el internet.
+async function cargar() {
+  const avisoCarga = elemento('[data-aviso-carga]');
+  const mostrar = lista => {
+    const propias = opiniones.filter(opinion => !opinion.ejemplo && !lista.some(otra => otra.fecha === opinion.fecha && otra.nombre === opinion.nombre));
+    opiniones = [...propias, ...lista, ...ejemplos()];
     mostrarTodo();
-  });
+  };
+  const sinPintar = () => !tarjetas.childElementCount;
+  const reloj = setTimeout(() => mostrar([]), sinPintar() ? ESPERA_EJEMPLOS : 2 ** 31 - 1);
+  try {
+    const lista = (await leerOpiniones()).map(ordenar).filter(Boolean);
+    clearTimeout(reloj);
+    cargaPendiente = false;
+    avisoCarga.hidden = true;
+    mostrar(lista);
+  } catch {
+    clearTimeout(reloj);
+    cargaPendiente = true;
+    avisoCarga.hidden = false;
+    if (sinPintar()) mostrar([]);
+  }
+}
+
+window.addEventListener('online', () => { if (cargaPendiente) cargar(); });
+cargar();
