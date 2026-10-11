@@ -39,16 +39,26 @@ h1, h2, h3, .num, .marca, .fono, figcaption, .pestanas button, .acceso b, .lugar
 h3 { font-size: 1.14em; line-height: 1.15; }
 .chico { font-size: .9em; }
 
-/* fondo: manchas redondas y hojas que se mecen */
+/* fondo: rayos de dos verdes que giran muy despacio, como un afiche, un resplandor claro al centro
+   y hojas que se mecen en los bordes */
 .fondo { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
-.fondo::before, .fondo::after { content: ""; position: absolute; border-radius: 50%; background: var(--mancha); width: 42vw; aspect-ratio: 1; }
-.fondo::before { top: -16vh; right: -10vw; }
-.fondo::after { bottom: -24vh; left: -12vw; }
+.fondo::before, .fondo::after { content: ""; position: absolute; }
+.fondo::before { left: 50%; top: 46%; width: 150vmax; height: 150vmax; margin: -75vmax 0 0 -75vmax; background: repeating-conic-gradient(var(--fondo) 0deg 9deg, var(--mancha) 9deg 18deg); animation: rayos 140s linear infinite; }
+.fondo::after { inset: 0; background: radial-gradient(circle at 50% 46%, rgba(255, 252, 214, .75), rgba(227, 242, 90, 0) 46%); }
 .fondo img { position: absolute; height: auto; rotate: var(--giro); animation: mecer var(--tiempo) var(--vaiven) infinite alternate; }
 
 @keyframes mecer { to { transform: rotate(18deg) translateY(-.7em); } }
 @keyframes flotar { to { transform: translateY(-.5em); } }
 @keyframes menear { to { transform: rotate(-16deg); } }
+@keyframes rayos { to { transform: rotate(360deg); } }
+@keyframes vuelta {
+  0%, 36% { transform: perspective(40em) rotateY(0deg); animation-timing-function: var(--vaiven); }
+  50%, 86% { transform: perspective(40em) rotateY(180deg); animation-timing-function: var(--vaiven); }
+  100% { transform: perspective(40em) rotateY(360deg); }
+}
+@keyframes alzar { 0%, 36%, 50%, 86%, 100% { scale: 1; } 43%, 93% { scale: 1.16; } }
+@keyframes destello { 0%, 13%, 50%, 63%, 100% { opacity: 0; } 4%, 54% { opacity: .9; } }
+@keyframes ladear { from { transform: perspective(30em) rotateY(-10deg); } to { transform: perspective(30em) rotateY(10deg); } }
 
 /* Al pasar de una página a otra, el contenido se funde con el anterior en vez de aparecer de golpe.
    El menú se queda quieto en su sitio. */
@@ -56,6 +66,7 @@ h3 { font-size: 1.14em; line-height: 1.15; }
 .menu { view-transition-name: menu; }
 ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 200ms; }
 
-/* lienzo */
-.lienzo { width: 65em; height: 36.5em; padding: 1.2em 2.2em 1.4em; display: grid; grid-template-rows: auto minmax(0, 1fr); gap: 1.1em; }
+/* lienzo: en una pantalla 16:9 mide justo el ancho de la pantalla (65em). Si la ventana es más ancha
+   que eso (por ejemplo, el navegador sin pantalla completa), se estira para no dejar huecos a los lados. */
+.lienzo { width: clamp(65em, 100vw, 92em); height: 36.5em; padding: 1.2em 2.2em 1.4em; display: grid; grid-template-rows: auto minmax(0, 1fr); gap: 1.1em; }
 main { display: grid; grid-template-rows: minmax(0, 1fr); min-height: 0; }

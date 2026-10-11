@@ -28,6 +28,7 @@
   .logo-portada { flex: 9 1 0; width: auto; min-width: 0; }
   .vasos { flex: 4 1 0; min-width: 0; margin: 0; display: block; }
   .vasos div, .vasos div:nth-child(2) { width: 100%; padding: .2em; animation: none; }
+  .vasos > div:nth-child(2) video { animation: none; }
   .vasos div:nth-child(odd), .portada .etiquetas, .pagina.inicio > .inclinadas { display: none; }
   .portada h1 { font-size: 2em; }
   .sello { font-size: .62em; top: -1.2em; right: -.6em; }

@@ -14,3 +14,6 @@
 .fono { font-size: 2.8em; line-height: 1.1; user-select: all; }
 .foto-pedido { background: var(--negro-foto); border: var(--borde); border-radius: 1em; padding: .3em; width: 9.5em; rotate: 5deg; justify-self: center; align-self: center; animation: flotar 4s var(--vaiven) infinite alternate; }
 .logo-grande { width: 100%; aspect-ratio: 3/2; object-fit: cover; border-radius: var(--radio); border: var(--borde); box-shadow: var(--sombra); background: var(--negro-foto); display: block; }
+/* en pantallas muy anchas la columna crece y el logo también: se deja achicar de alto para no apretar lo de abajo */
+.pila > .logo-grande { flex: 0 1 auto; min-height: 0; }
+.pila > .logo-grande + .cols { flex: none; }

@@ -12,6 +12,15 @@
 .vasos div:nth-child(1) { rotate: -6deg; }
 .vasos div:nth-child(2) { width: 8.6em; z-index: 1; animation-delay: -1.2s; }
 .vasos div:nth-child(3) { rotate: 6deg; animation-delay: -2.4s; }
+/* los envases de los costados se voltean como una carta y atrás muestran otro diseño;
+   al girar se levantan un poco y al caer sueltan un destello */
+.vasos div.giro { position: relative; width: auto; padding: 0; border: 0; border-radius: .7em; background: none; rotate: none; transform-style: preserve-3d; animation: vuelta 7s infinite, alzar 7s var(--vaiven) infinite; }
+.vasos div:nth-child(3) .giro { animation-delay: -3.5s; }
+.giro img { backface-visibility: hidden; }
+.giro .dorso { position: absolute; inset: 0; height: 100%; transform: rotateY(180deg); }
+.giro::after { content: ""; position: absolute; inset: 0; border-radius: .7em; pointer-events: none; opacity: 0; background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, .7) 50%, transparent 70%); animation: destello 7s infinite; animation-delay: inherit; }
+/* el envase del medio (el video) se ladea suave a los lados */
+.vasos > div:nth-child(2) video { animation: ladear 5s var(--vaiven) infinite alternate; }
 .vasos img, .vasos video, .disenos img, .foto-pedido img { width: 100%; aspect-ratio: 2/3; object-fit: cover; border-radius: .7em; display: block; }
 .sello { position: absolute; top: -.9em; right: -.5em; z-index: 1; width: 6.2em; height: 6.2em; border-radius: 50%; background: var(--naranja); border: var(--borde); display: grid; place-content: center; text-align: center; line-height: 1.05; rotate: 10deg; animation: menear 2.6s var(--vaiven) infinite alternate; font-weight: 800; font-size: .85em; }
 .sello b { font-family: var(--titulos); font-weight: 400; font-size: 1.9em; display: block; }
