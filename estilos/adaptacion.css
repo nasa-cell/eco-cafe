@@ -34,6 +34,8 @@
   .sello { font-size: .62em; top: -1.2em; right: -.6em; }
   .botones { width: 100%; }
   .botones .btn { flex: 1 1 0; text-align: center; padding: .85em .5em; }
+  .botones .ver-video { display: none; }
+  .logo-portada .ver-video { display: block; position: absolute; left: .5em; bottom: .5em; padding: .45em .9em; font-size: .85em; }
 
   .banner { padding: .7em 4.6em .7em 1.1em; }
   .banner h2 { font-size: 1.4em; }

@@ -31,3 +31,12 @@
 .acceso span { display: flex; flex-direction: column; line-height: 1.2; min-width: 0; }
 .acceso b { font-size: 1.1em; }
 .acceso small { font-size: .78em; }
+
+/* video de la portada: se abre en grande al tocar «Ver video». En el celular el botón va sobre el logo, para no sumar un renglón. */
+.logo-portada .ver-video { display: none; }
+.ventana-video { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; padding: 1em; background: rgb(23 48 15 / .86); }
+.ventana-video[hidden] { display: none; }
+.ventana-video .marco { display: grid; justify-items: center; gap: .7em; }
+.ventana-video video { display: block; aspect-ratio: 16/9; width: min(94vw, 138vh); height: auto; border: var(--borde); border-radius: 1.2em; background: var(--negro-foto); box-shadow: .38em .38em 0 var(--naranja); }
+.ventana-video video.vertical { aspect-ratio: 9/16; width: min(86vw, 43vh); }
+.ventana-video .btn { font: inherit; font-weight: 800; cursor: pointer; }

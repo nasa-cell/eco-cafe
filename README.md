@@ -25,7 +25,7 @@ Página web del emprendimiento **EcoCafé**: un envase de acero inoxidable con d
 - `estilos/`: colores, menú, cuadros y adaptación a celular.
 - `programas/`: animaciones, pestañas, teclado, fondo de hojas, opiniones y el puente para manejar la página desde el celular con Conexiones.
 - `imagenes/`: logo, fotos de los envases, emoticones y fotos de perfil de las opiniones de ejemplo.
-- `videos/`: el logo animado y el envase girando que se ven en la portada.
+- `videos/`: el logo animado y el envase girando que se ven en la portada, y el video del envase que abre el botón «Ver video» (horizontal para la PC, vertical para el celular).
 
 ## Opiniones
 

@@ -45,6 +45,7 @@
             <div class="botones">
               <a class="btn principal" href="paginas/pedir.html">Pedir mi envase</a>
               <a class="btn" href="paginas/impacto.html">Ver el impacto</a>
+              <a class="btn ver-video" href="videos/envase-horizontal.mp4">▶ Ver video</a>
             </div>
             <div class="etiquetas"><span>Reutilizable</span><span>Acero inoxidable</span><span>Diseños únicos</span></div>
           </div>
@@ -52,6 +53,7 @@
             <div class="logo-portada">
               <video src="videos/logo-animado.mp4" poster="imagenes/logo.jpg" autoplay muted loop playsinline aria-label="Logo animado de EcoCafé con tres osos y un vaso de café"></video>
               <span class="parche"></span>
+              <a class="btn ver-video" href="videos/envase-vertical.mp4">▶ Ver video</a>
             </div>
             <div class="vasos">
               <div><div class="giro"><img src="imagenes/vaso-cafe.jpg" alt="Envase EcoCafé con diseño café"><img class="dorso" src="imagenes/vaso-frio.jpg" alt="Vaso EcoCafé para bebidas frías"></div></div>
@@ -72,10 +74,18 @@
     </main>
   </div>
 
+  <div class="ventana-video" id="ventanaVideo" role="dialog" aria-label="Video del envase EcoCafé" hidden>
+    <div class="marco">
+      <video controls playsinline preload="none" poster="imagenes/video-envase-horizontal.jpg"></video>
+      <button class="btn" type="button">✕ Cerrar</button>
+    </div>
+  </div>
+
   <script src="programas/animaciones.js"></script>
   <script src="programas/pestanas.js"></script>
   <script src="programas/teclado.js"></script>
   <script src="programas/fondo.js"></script>
+  <script src="programas/video-portada.js"></script>
   <script src="programas/puente-conexiones.js" defer></script>
 </body>
 </html>
